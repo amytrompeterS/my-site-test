@@ -162,6 +162,15 @@
       outline-offset:3px;
     }
 
+    /* weather card styles */
+    .weather-card{ padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); box-shadow:0 6px 18px rgba(2,6,23,0.45); border:1px solid rgba(255,255,255,0.02); margin-bottom:18px; }
+    .weather-card .card-title{margin-bottom:8px}
+    .weather-row{display:flex;align-items:center;gap:12px}
+    .weather-emoji{font-size:30px;line-height:1}
+    .weather-temp{font-family:Playfair Display, serif;font-weight:600;font-size:24px}
+    .weather-desc{color:var(--muted);font-size:13px}
+    .weather-place{color:rgba(255,255,255,0.6);font-size:13px;margin-top:8px}
+
     footer{margin-top:22px;text-align:center;color:rgba(255,255,255,0.45);font-size:13px}
 
     @media (max-width:940px){
@@ -180,7 +189,7 @@
     <header>
       <div class="brand">
         <div class="avatar" aria-hidden="false">
-          <img src="images/amy-new.jpg" alt="Amy — Designer" loading="lazy">
+          <img src="images/amy-headshot.jpg" alt="Amy — Designer" loading="lazy">
         </div>
         <div>
           <h1>Amy — Designer</h1>
@@ -217,7 +226,7 @@
           <div style="width:220px;flex-shrink:0;">
             <div style="border-radius:14px;padding:6px;background:linear-gradient(180deg,rgba(255,107,155,0.08),rgba(124,92,255,0.06));border:1px solid rgba(255,255,255,0.03);">
               <div class="portrait-wrap" aria-hidden="false">
-                <img class="portrait" src="images/amy-new.jpg" alt="Amy portrait" loading="lazy">
+                <img class="portrait" src="images/amy-headshot.jpg" alt="Amy portrait" loading="lazy">
               </div>
             </div>
           </div>
@@ -245,6 +254,20 @@
       </section>
 
       <aside style="min-width:0">
+        <div class="panel weather-card" id="weatherCard" aria-live="polite">
+          <div class="card-title">Weather</div>
+          <div id="weatherContent">
+            <div class="weather-row">
+              <div class="weather-emoji" id="weatherEmoji">⛅</div>
+              <div>
+                <div class="weather-temp" id="weatherTemp">—°F</div>
+                <div class="weather-desc" id="weatherDesc">Loading…</div>
+              </div>
+            </div>
+            <div class="weather-place" id="weatherPlace"></div>
+          </div>
+        </div>
+
         <div class="panel">
           <div class="card-title">Contact</div>
           <div class="contact-card">
@@ -288,6 +311,70 @@
         if(e.key === 'Enter' || e.key === ' ') btn.click();
       });
     })();
+
+    // Weather widget: Open-Meteo current weather using browser location (no API key)
+    (function(){
+      const elTemp = document.getElementById('weatherTemp');
+      const elEmoji = document.getElementById('weatherEmoji');
+      const elDesc = document.getElementById('weatherDesc');
+      const elPlace = document.getElementById('weatherPlace');
+
+      const emojiFor = code => {
+        if(code === 0) return '☀️';
+        if([1,2].includes(code)) return '🌤️';
+        if(code === 3) return '☁️';
+        if([45,48].includes(code)) return '🌫️';
+        if((code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 61 && code <= 63)) return '🌧️';
+        if(code >= 71 && code <= 77) return '❄️';
+        if(code >= 95 && code <= 99) return '⛈️';
+        return '🌥️';
+      };
+
+      const descFor = code => {
+        if(code === 0) return 'Clear';
+        if([1,2].includes(code)) return 'Mostly clear';
+        if(code === 3) return 'Overcast';
+        if([45,48].includes(code)) return 'Fog';
+        if((code >= 51 && code <= 67) || (code >= 80 && code <= 82) || (code >= 61 && code <= 63)) return 'Rain';
+        if(code >= 71 && code <= 77) return 'Snow';
+        if(code >= 95 && code <= 99) return 'Thunderstorm';
+        return 'Cloudy';
+      };
+
+      function showError(msg){
+        if(elDesc) elDesc.textContent = msg;
+        if(elEmoji) elEmoji.textContent = '❌';
+      }
+
+      if(!navigator.geolocation){
+        showError('Location not available');
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(async pos => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        try{
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=fahrenheit`;
+          const res = await fetch(url);
+          if(!res.ok) throw new Error('Failed to fetch');
+          const json = await res.json();
+          const cw = json.current_weather;
+          if(!cw) return showError('No weather data');
+          if(elTemp) elTemp.textContent = Math.round(cw.temperature) + '°F';
+          if(elEmoji) elEmoji.textContent = emojiFor(cw.weathercode);
+          if(elDesc) elDesc.textContent = descFor(cw.weathercode);
+          if(elPlace) elPlace.textContent = `Lat ${lat.toFixed(2)}, Lon ${lon.toFixed(2)}`;
+        }catch(err){
+          console.error(err);
+          showError('Weather unavailable');
+        }
+      }, err => {
+        console.warn(err);
+        showError('Enable location to see your weather.');
+      }, {timeout:8000});
+    })();
+
   </script>
 </body>
 </html>
