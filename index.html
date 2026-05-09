@@ -67,6 +67,30 @@
       font-size:28px;
       color:white;
       box-shadow:0 6px 18px rgba(124,92,255,0.12);
+      overflow:hidden;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    /* portrait used in the hero pink card */
+    .portrait-wrap{
+      border-radius:12px;
+      overflow:hidden;
+      width:100%;
+      height:200px;
+      display:block;
+      box-shadow:0 8px 30px rgba(2,6,23,0.45);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .portrait-wrap img.portrait{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:translateZ(0);
     }
     h1{margin:0;font-family:Playfair Display, serif;font-weight:600;font-size:20px}
     p.lead{margin:0;color:var(--muted);font-size:13px}
@@ -118,7 +142,25 @@
 
     aside .card-title{font-size:13px;color:var(--muted);margin-bottom:8px}
     .contact-card{display:flex;flex-direction:column;gap:12px}
-    .contact-card a{display:block;padding:12px;border-radius:12px;text-decoration:none;color:white;background:linear-gradient(90deg,var(--accent1),var(--accent2));text-align:center}
+    .contact-card a{
+      display:block;
+      padding:12px;
+      border-radius:12px;
+      text-decoration:none;
+      color:white;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      text-align:center;
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+    }
+    .contact-card a:hover{
+      transform:translateY(-6px);
+      box-shadow:0 14px 30px rgba(124,92,255,0.14);
+      opacity:1;
+    }
+    .contact-card a:focus{
+      outline:3px solid rgba(124,92,255,0.18);
+      outline-offset:3px;
+    }
 
     footer{margin-top:22px;text-align:center;color:rgba(255,255,255,0.45);font-size:13px}
 
@@ -137,7 +179,9 @@
   <div class="wrap" role="main">
     <header>
       <div class="brand">
-        <div class="avatar" aria-hidden="true">A</div>
+        <div class="avatar" aria-hidden="false">
+          <img src="images/amy.jpg" alt="Amy — Designer" loading="lazy">
+        </div>
         <div>
           <h1>Amy — Designer</h1>
           <p class="lead">I create simple, human-centered experiences for web & product.</p>
@@ -171,20 +215,10 @@
             </div>
           </div>
           <div style="width:220px;flex-shrink:0;">
-            <div style="border-radius:14px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03);">
-              <svg width="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <defs>
-                  <linearGradient id="g1" x1="0" x2="1">
-                    <stop offset="0" stop-color="#7c5cff"/>
-                    <stop offset="1" stop-color="#ff6b9b"/>
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="200" height="200" rx="18" fill="url(#g1)" />
-                <g transform="translate(40,40)" fill="rgba(255,255,255,0.95)">
-                  <circle cx="40" cy="40" r="28" fill="white" opacity="0.12" />
-                  <path d="M12 56c8-14 44-18 56-4" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.16"/>
-                </g>
-              </svg>
+            <div style="border-radius:14px;padding:6px;background:linear-gradient(180deg,rgba(255,107,155,0.08),rgba(124,92,255,0.06));border:1px solid rgba(255,255,255,0.03);">
+              <div class="portrait-wrap" aria-hidden="false">
+                <img class="portrait" src="images/amy.jpg" alt="Amy portrait" loading="lazy">
+              </div>
             </div>
           </div>
         </div>
@@ -216,24 +250,24 @@
           <div class="contact-card">
             <div style="color:var(--muted);font-size:14px">Based in your time zone • Available for freelance</div>
             <a href="mailto:amy@example.com?subject=Hi%20Amy">Email me</a>
-            <a class="btn" href="#" onclick="alert('Resume download placeholder — replace with your file.');return false;">Download CV</a>
-          </div>
-        </div>
+             <a class="btn" href="#" onclick="alert('Resume download placeholder — replace with your file.');return false;">Download CV</a>
+           </div>
+         </div>
 
-        <div class="panel" style="margin-top:16px;">
+         <div class="panel" style="margin-top:16px;">
           <div class="card-title">Quick links</div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <a class="btn" href="#portfolio">Portfolio</a>
             <a class="btn" href="#about">About</a>
             <a class="btn" href="#contact">Work with me</a>
           </div>
-        </div>
+         </div>
 
-        <footer>
-          © <span id="year"></span> Amy — Designer
-        </footer>
-      </aside>
-    </main>
+         <footer>
+           © <span id="year"></span> Amy — Designer
+         </footer>
+       </aside>
+     </main>
 
     <div class="wave" aria-hidden="true">
       <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
