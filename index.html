@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amy — Designer</title>
+  <meta name="description" content="Amy — Designer. Portfolio, projects and contact.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent1:#7c5cff;
+      --accent2:#ff6b9b;
+      --muted:rgba(255,255,255,0.7);
+      --glass:rgba(255,255,255,0.04);
+      --radius:14px;
+      --max-width:1100px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg, var(--bg) 0%, #071029 60%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+    }
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      border-radius:20px;
+      background:radial-gradient(1000px 300px at 10% 0%, rgba(124,92,255,0.08), transparent 10%), radial-gradient(900px 200px at 90% 100%, rgba(255,107,155,0.04), transparent 10%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent 30%);
+      padding:48px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+    header{
+      display:flex;
+      gap:24px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:28px;
+    }
+    .brand{
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+    .avatar{
+      width:84px;
+      height:84px;
+      border-radius:18px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      display:grid;
+      place-items:center;
+      font-family:Playfair Display, serif;
+      font-weight:600;
+      font-size:28px;
+      color:white;
+      box-shadow:0 6px 18px rgba(124,92,255,0.12);
+    }
+    h1{margin:0;font-family:Playfair Display, serif;font-weight:600;font-size:20px}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    nav{display:flex;gap:12px}
+    a.btn{
+      padding:10px 14px;
+      border-radius:12px;
+      text-decoration:none;
+      color:var(--muted);
+      font-size:13px;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.04);
+      transition:all .2s ease;
+    }
+    a.btn.primary{
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:white;
+      border:0;
+      box-shadow:0 8px 20px rgba(124,92,255,0.12);
+    }
+    a.btn:hover{transform:translateY(-4px)}
+
+    main{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+    }
+    .hero{
+      display:flex;
+      gap:20px;
+      align-items:flex-start;
+      margin-bottom:18px;
+    }
+    .hero h2{margin:0;font-family:Playfair Display, serif;font-size:36px}
+    .role{color:var(--muted);margin-top:6px}
+    .cta-row{margin-top:18px;display:flex;gap:12px}
+
+    .about{color:var(--muted);line-height:1.6}
+
+    .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .chip{padding:8px 10px;border-radius:999px;background:var(--glass);font-size:13px;color:var(--muted)}
+
+    .portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+    .project{background:linear-gradient(180deg, rgba(255,255,255,0.016), transparent);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .project h3{margin:0;font-size:16px}
+    .project p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    aside .card-title{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .contact-card{display:flex;flex-direction:column;gap:12px}
+    .contact-card a{display:block;padding:12px;border-radius:12px;text-decoration:none;color:white;background:linear-gradient(90deg,var(--accent1),var(--accent2));text-align:center}
+
+    footer{margin-top:22px;text-align:center;color:rgba(255,255,255,0.45);font-size:13px}
+
+    @media (max-width:940px){
+      main{grid-template-columns:1fr}
+      .avatar{width:64px;height:64px}
+      header{flex-direction:column;align-items:flex-start;gap:18px}
+    }
+
+    /* small decorative wave */
+    .wave{height:42px;overflow:hidden}
+    .wave svg{display:block;width:100%}
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header>
+      <div class="brand">
+        <div class="avatar" aria-hidden="true">A</div>
+        <div>
+          <h1>Amy — Designer</h1>
+          <p class="lead">I create simple, human-centered experiences for web & product.</p>
+        </div>
+      </div>
+      <nav aria-label="Primary">
+        <a class="btn" href="#portfolio">Portfolio</a>
+        <a class="btn" href="#about">About</a>
+        <a class="btn primary" href="#contact">Work with me</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel" aria-labelledby="intro">
+        <div class="hero">
+          <div style="flex:1">
+            <h2 id="intro">Hi — I'm Amy.</h2>
+            <div class="role">Designer focused on product, visual identity & simple interfaces.</div>
+            <div class="cta-row">
+              <a class="btn primary" href="#contact">Let's collaborate</a>
+              <a class="btn" href="#portfolio">See work</a>
+            </div>
+            <p class="about" id="about" style="margin-top:18px">I love turning complex ideas into clear, beautiful experiences. My work blends craft, strategy and a healthy dose of curiosity. Below are a few projects and experiments — happy to talk about any of them.</p>
+
+            <div class="skills" aria-hidden="true">
+              <span class="chip">Product Design</span>
+              <span class="chip">UI / Visual</span>
+              <span class="chip">Branding</span>
+              <span class="chip">Prototyping</span>
+              <span class="chip">Figma</span>
+            </div>
+          </div>
+          <div style="width:220px;flex-shrink:0;">
+            <div style="border-radius:14px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03);">
+              <svg width="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="1">
+                    <stop offset="0" stop-color="#7c5cff"/>
+                    <stop offset="1" stop-color="#ff6b9b"/>
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="200" height="200" rx="18" fill="url(#g1)" />
+                <g transform="translate(40,40)" fill="rgba(255,255,255,0.95)">
+                  <circle cx="40" cy="40" r="28" fill="white" opacity="0.12" />
+                  <path d="M12 56c8-14 44-18 56-4" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.16"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:18px">Selected work</h3>
+        <div id="portfolio" class="portfolio-grid">
+          <article class="project" aria-labelledby="p1">
+            <h3 id="p1">Market App Redesign</h3>
+            <p>Revamped commerce flows and visual language — increased conversion and trust.</p>
+          </article>
+          <article class="project" aria-labelledby="p2">
+            <h3 id="p2">Wellness Brand</h3>
+            <p>Brand system and assets for a small wellness startup — packaging & web.</p>
+          </article>
+          <article class="project" aria-labelledby="p3">
+            <h3 id="p3">Onboarding Experiment</h3>
+            <p>Micro-interactions and progressive disclosure for better activation.</p>
+          </article>
+          <article class="project" aria-labelledby="p4">
+            <h3 id="p4">Design System</h3>
+            <p>Reusable components, tokens and documentation for cross-team work.</p>
+          </article>
+        </div>
+      </section>
+
+      <aside style="min-width:0">
+        <div class="panel">
+          <div class="card-title">Contact</div>
+          <div class="contact-card">
+            <div style="color:var(--muted);font-size:14px">Based in your time zone • Available for freelance</div>
+            <a href="mailto:amy@example.com?subject=Hi%20Amy">Email me</a>
+            <a class="btn" href="#" onclick="alert('Resume download placeholder — replace with your file.');return false;">Download CV</a>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:16px;">
+          <div class="card-title">Quick links</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a class="btn" href="#portfolio">Portfolio</a>
+            <a class="btn" href="#about">About</a>
+            <a class="btn" href="#contact">Work with me</a>
+          </div>
+        </div>
+
+        <footer>
+          © <span id="year"></span> Amy — Designer
+        </footer>
+      </aside>
+    </main>
+
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,20 C300,80 900,-20 1200,20 L1200,60 L0,60 Z" fill="rgba(255,255,255,0.02)"></path>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    // small scripts: year and simple focus handling
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // keyboard accessible skip for small screens: focus management for primary CTA
+    (function(){
+      const btn = document.querySelector('a.primary');
+      if(!btn) return;
+      btn.addEventListener('keydown', e=>{
+        if(e.key === 'Enter' || e.key === ' ') btn.click();
+      });
+    })();
+  </script>
+</body>
+</html>
